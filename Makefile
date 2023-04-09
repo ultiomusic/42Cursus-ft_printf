@@ -1,3 +1,4 @@
+
 SRCS			=	ft_printf.c
 OBJS			= $(SRCS:.c=.o)
 

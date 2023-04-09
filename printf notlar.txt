@@ -1,0 +1,55 @@
+Tabii, write_output() fonksiyonu formatlama işleminin en önemli kısmını oluşturuyor. Bu fonksiyon, verilen argümanı, belirtilen sayı sistemi ve karakter setine göre işleyerek standart çıkışa yazdırıyor.
+
+Fonksiyonun parametreleri şu şekilde:
+
+base_set : Karakter seti.
+base : Sayı sistemi.
+arg : İşlenecek olan argüman.
+id : Format belirteci.
+Fonksiyon içindeki ilk if bloğu, negatif sayıları işlemek için kullanılır. Eğer arg negatif ise ve format belirteci 'd', 'i', 'x', 'X', veya 'u' ise, '-' karakteri yazdırılır ve argümanın mutlak değeri alınır.
+
+Ardından, argümanın sayı sistemi üzerinde işlem yapmak için gereken işlemler gerçekleştirilir. Eğer argüman sayı sistemi tabanından küçükse, basitçe arg % base işlemi kullanılarak karakter setindeki doğru karakter yazdırılır. Eğer argüman sayı sistemi tabanından büyükse, sayı işlemi tekrar edilerek arg / base değeri elde edilir ve karakter setindeki doğru karakter yazdırılır. Bu işlem, son karakter yazdırılana kadar tekrarlanır.
+
+Eğer format belirteci 'p' ise, argüman 'unsigned long' türünde olduğu varsayılır ve fonksiyon önce "0x" ön eki yazdırarak işleme başlar. Sonrasında, işlem 'x' format belirteciyle aynı şekilde yapılır.
+
+Sonuç olarak, write_output() fonksiyonu, verilen argümanın doğru sayı sistemi ve karakter seti kullanılarak işlenmesini ve standart çıkışa yazdırılmasını sağlar.
+
+sort_output fonksiyonu, ft_printf fonksiyonu içerisinde kullanılmak üzere yazılmıştır. Bu fonksiyon, verilen format stringindeki her bir conversion specifier'ı ele alır ve ilgili argümanın türüne göre uygun bir işlem gerçekleştirir.
+
+Fonksiyon, iki parametre alır: arg_ptr ve id. arg_ptr, va_list tipinde tanımlanmış bir değişken olup, fonksiyonun çalıştırıldığı sırada fonksiyona geçirilen argümanları tutar. id ise, format stringindeki conversion specifier'ın karakter kodudur.
+
+Fonksiyon, öncelikle id'ye göre hangi işlemin yapılacağını belirler. Bu işlem, aşağıdaki if-else blokları yardımıyla gerçekleştirilir:
+
+'%': Sadece '%' karakterini yazdırır.
+'c': Bir karakter yazdırır.
+'s': Bir string yazdırır.
+'d' veya 'i': Bir tamsayı değeri yazdırır.
+'u': Bir işaretli tamsayı değeri yazdırır.
+'p': Bir işaretli tamsayı değeri (pointer) yazdırır.
+'x': Bir onaltılık tamsayı değeri yazdırır.
+'X': Bir onaltılık tamsayı değeri yazdırır.
+Daha sonra, id'ye göre uygun bir write_output çağrısı yapar ve bu fonksiyonun geri dönüş değerini len değişkenine ekler. Fonksiyonun sonunda ise, len değişkeni geri döndürülür.
+
+Bu fonksiyon, write_output fonksiyonu ile birlikte çalışarak, ft_printf fonksiyonunun temel işlevlerinden birini yerine getirir: verilen format stringindeki conversion specifier'ları ele alarak, ilgili argümanları ekrana yazdırır.
+
+Bu fonksiyonda, değişken sayıda argümanları kullanabilmek için stdarg.h kütüphanesindeki va_list ve va_start ile va_end fonksiyonları kullanılmıştır.
+
+va_list veri türü, değişken sayıda argümanların tutulduğu bir liste oluşturmak için kullanılır. va_start fonksiyonu, bu listeyi başlatmak için kullanılır. Fonksiyon içinde tanımlanan bir va_list değişkenine, va_start fonksiyonu ile birlikte, son sabit argümanın adresi verilir.
+
+Örneğin, ft_printf fonksiyonu içinde va_list tipinde bir değişken olan arg_ptr tanımlanmıştır. va_start(arg_ptr, input_str) satırında ise arg_ptr değişkeni input_str adresiyle başlatılmaktadır.
+
+Fonksiyon içinde, arg_ptr değişkeni ile değişken sayıda argümanlara erişilebilir hale gelir. Örneğin, sort_output fonksiyonu içinde va_arg(arg_ptr, int) satırı ile arg_ptr değişkeni ile verilen değer int türüne dönüştürülmüş ve kullanılmıştır. va_arg fonksiyonu, verilen va_list değişkenindeki bir sonraki argümanın değerini döndürür. Bu sayede, değişken sayıda argümanı fonksiyona göndererek, bu argümanlara erişmek ve kullanmak mümkündür.
+
+Fonksiyonun sonunda ise va_end fonksiyonu kullanılarak, va_list değişkeninin kullanımı sonlandırılır. Bu işlem, bu fonksiyonun kullanımından sonra hafızada biriken geçici değişkenlerin temizlenmesini sağlar.
+----------------------------------------------------------------------------------------------------------
+Tabii, sum() fonksiyonu C dilinde "variadic argument" yani değişken sayıda argüman alan bir fonksiyondur.
+
+Fonksiyonun imzasında, ilk argüman olan count değişkeni bize kaç tane sayı olduğunu söyler. Fonksiyon çağrıldığında, bu sayıya göre fonksiyon değişken sayıda argüman kabul eder.
+
+Fonksiyon içinde, va_list türünden bir pointer olan args değişkeni oluşturulur. va_start() fonksiyonu ile args pointer'ı, fonksiyonun ilk argümanı olan count değeri ile birlikte kullanıma hazır hale getirilir. Bu sayede fonksiyon değişken sayıda argüman alabilir.
+
+Fonksiyon içinde bir döngü oluşturulur ve döngü count değerine kadar döner. Her döngü adımında, va_arg() fonksiyonu ile args pointer'ından bir sonraki argüman okunur ve toplama işlemine eklenir.
+
+Son olarak, va_end() fonksiyonu ile args pointer'ı kullanımı sonlandırılır ve toplam değer total geri döndürülür.
+
+Bu şekilde fonksiyon, değişken sayıda argüman alan toplama işlemini gerçekleştirmiş olur.
