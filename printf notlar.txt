@@ -53,3 +53,11 @@ Fonksiyon içinde bir döngü oluşturulur ve döngü count değerine kadar dön
 Son olarak, va_end() fonksiyonu ile args pointer'ı kullanımı sonlandırılır ve toplam değer total geri döndürülür.
 
 Bu şekilde fonksiyon, değişken sayıda argüman alan toplama işlemini gerçekleştirmiş olur.
+-----------------------------------------------------------------------------------------------------------
+va_arg fonksiyonu, stdarg.h kütüphanesi altında tanımlanan bir fonksiyondur. Bu fonksiyon, esnek sayıda argüman alan fonksiyonlar içerisindeki verilerin okunmasını sağlar.
+
+sort_output fonksiyonu, format stringi içerisindeki her % karakterini takip eden karakterlerin ne tür verileri temsil ettiğini bilir. Ancak, fonksiyona gelen değişken sayıda argümanların her birinin veri tipi ve değeri farklı olabilir. Bu nedenle, va_arg fonksiyonu kullanılarak, bu fonksiyona gelen değişken sayıda argümanlardan sırayla her biri okunabilir.
+
+va_arg fonksiyonu, iki parametre alır. İlk parametre, va_list tipinde bir değişken, ikinci parametre ise okunacak değişkenin türüdür. Fonksiyon, va_list tipindeki değişkenden sırayla okuma yapar ve bu okunan değeri, fonksiyon parametresi olarak verilen türde bir değişkene atar.
+
+sort_output fonksiyonunda, id değişkeni ile hangi format türü olduğu belirlenen her bir argümanın, va_arg fonksiyonu ile sırayla okunması sağlanır. Bu sayede, her bir argümanın türü ve değeri doğru bir şekilde işlenebilir.
