@@ -63,3 +63,6 @@ va_arg fonksiyonu, iki parametre alır. İlk parametre, va_list tipinde bir değ
 sort_output fonksiyonunda, id değişkeni ile hangi format türü olduğu belirlenen her bir argümanın, va_arg fonksiyonu ile sırayla okunması sağlanır. Bu sayede, her bir argümanın türü ve değeri doğru bir şekilde işlenebilir.
 ----------------------------------------------------------------------------------------------------------------
 "0x" ön ekli hexadecimal değerleri yazdırırken, kullanılan adresin yani bellek bloğunun boyutunun 32 bit olduğu varsayılır. Bu sebeple adres 32 bit uzunluğunda bir unsigned long değişkeni olarak tutulur. Bu nedenle, %p biçimlendirici, unsigned long olarak işaretlenmiştir ve argüman olarak gönderilen adres bu şekilde okunur ve yazdırılır.
+-------------------------------------------------------------------------------------------------------------------
+printf("My name is %s and I am %d years old.\n", "John", 25);
+Bu çıktı My name is John and I am 25 years old. çıktısını verir
